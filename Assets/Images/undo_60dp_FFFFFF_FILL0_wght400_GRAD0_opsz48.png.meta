@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: adc557040830e496a9bc6cce8f4d27b4
+guid: 5654562b2db784952b76ed4ebbc67738
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5913607054492096061
-    second: delete_60dp_EA3323_FILL0_wght400_GRAD0_opsz48_0
+      213: -2774471379948827363
+    second: undo_60dp_FFFFFF_FILL0_wght400_GRAD0_opsz48_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: delete_60dp_EA3323_FILL0_wght400_GRAD0_opsz48_0
+      name: undo_60dp_FFFFFF_FILL0_wght400_GRAD0_opsz48_0
       rect:
         serializedVersion: 2
         x: 9
-        y: 6
+        y: 11
         width: 42
-        height: 48
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d36de30d84a511250800000000000000
-      internalID: 5913607054492096061
+      spriteID: d1d89aecaf81f79d0800000000000000
+      internalID: -2774471379948827363
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      delete_60dp_EA3323_FILL0_wght400_GRAD0_opsz48_0: 5913607054492096061
+      undo_60dp_FFFFFF_FILL0_wght400_GRAD0_opsz48_0: -2774471379948827363
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
