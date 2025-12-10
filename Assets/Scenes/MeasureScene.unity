@@ -486,6 +486,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: db_a_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4947284915655672539, guid: 2645f35008e874350b4878e36acae780, type: 3}
+      propertyPath: techID
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -587,6 +591,10 @@ PrefabInstance:
     - target: {fileID: 2615432386066867744, guid: 82bcbb305b7c54dca9c0c96111412cdd, type: 3}
       propertyPath: m_Name
       value: dth_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 5724506200967314890, guid: 82bcbb305b7c54dca9c0c96111412cdd, type: 3}
+      propertyPath: techID
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -953,6 +961,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fa_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6812007204073659225, guid: e5b5e9e63837940ec8ab4f903c5f9061, type: 3}
+      propertyPath: techID
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -971,6 +983,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2144882561}
     m_Modifications:
+    - target: {fileID: 3255288350014691236, guid: b0dfef9469e7f43fc888b1204d0fee03, type: 3}
+      propertyPath: techID
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5050631312863120462, guid: b0dfef9469e7f43fc888b1204d0fee03, type: 3}
       propertyPath: m_Name
       value: ss_Button
@@ -1073,6 +1089,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2144882561}
     m_Modifications:
+    - target: {fileID: 3799405031368657786, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
+      propertyPath: techID
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6881600648202391696, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
       propertyPath: m_Name
       value: us_Button
@@ -1175,6 +1195,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1942597792}
     m_Modifications:
+    - target: {fileID: 1713654170880872797, guid: 552f8aa16bd86460e95c3aae63066a94, type: 3}
+      propertyPath: techID
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 5254080300465787868, guid: 552f8aa16bd86460e95c3aae63066a94, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1564,6 +1588,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1942597792}
     m_Modifications:
+    - target: {fileID: 3757595277708315328, guid: 8ccae1c06d97c4b2fb2892ee3a59ef8e, type: 3}
+      propertyPath: techID
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 6854409456634122538, guid: 8ccae1c06d97c4b2fb2892ee3a59ef8e, type: 3}
       propertyPath: m_Name
       value: nd_Button
@@ -1750,6 +1778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: dc_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 5724506200967314890, guid: 82bcbb305b7c54dca9c0c96111412cdd, type: 3}
+      propertyPath: techID
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1859,6 +1891,10 @@ PrefabInstance:
     - target: {fileID: 3427838009082517809, guid: 2645f35008e874350b4878e36acae780, type: 3}
       propertyPath: m_Name
       value: db_g_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947284915655672539, guid: 2645f35008e874350b4878e36acae780, type: 3}
+      propertyPath: techID
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2152,6 +2188,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: nb_c_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4947284915655672539, guid: 2645f35008e874350b4878e36acae780, type: 3}
+      propertyPath: techID
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2170,6 +2210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 274907479}
     m_Modifications:
+    - target: {fileID: 3255288350014691236, guid: b0dfef9469e7f43fc888b1204d0fee03, type: 3}
+      propertyPath: techID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5050631312863120462, guid: b0dfef9469e7f43fc888b1204d0fee03, type: 3}
       propertyPath: m_Name
       value: st_Button
@@ -2272,6 +2316,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 274907479}
     m_Modifications:
+    - target: {fileID: 3799405031368657786, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
+      propertyPath: techID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6881600648202391696, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
       propertyPath: m_Name
       value: ut_Button
@@ -2486,6 +2534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: nb_a_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4947284915655672539, guid: 2645f35008e874350b4878e36acae780, type: 3}
+      propertyPath: techID
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2587,6 +2639,10 @@ PrefabInstance:
     - target: {fileID: 3869565832087093427, guid: e5b5e9e63837940ec8ab4f903c5f9061, type: 3}
       propertyPath: m_Name
       value: fth_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812007204073659225, guid: e5b5e9e63837940ec8ab4f903c5f9061, type: 3}
+      propertyPath: techID
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2965,6 +3021,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1348121330}
     m_Modifications:
+    - target: {fileID: 2952760585134531747, guid: e7bee583b0b404cf58d621a04d2cec95, type: 3}
+      propertyPath: techID
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 4881965704008171337, guid: e7bee583b0b404cf58d621a04d2cec95, type: 3}
       propertyPath: m_Name
       value: bc_Button
@@ -3171,6 +3231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: g_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4974206520538399550, guid: b345c95df17644e7ba04b4353a268ea8, type: 3}
+      propertyPath: techID
+      value: 21
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3276,6 +3340,10 @@ PrefabInstance:
     - target: {fileID: 3427838009082517809, guid: 2645f35008e874350b4878e36acae780, type: 3}
       propertyPath: m_Name
       value: ub_a_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947284915655672539, guid: 2645f35008e874350b4878e36acae780, type: 3}
+      propertyPath: techID
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3383,6 +3451,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 89943101}
     m_Modifications:
+    - target: {fileID: 2952760585134531747, guid: e7bee583b0b404cf58d621a04d2cec95, type: 3}
+      propertyPath: techID
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4881965704008171337, guid: e7bee583b0b404cf58d621a04d2cec95, type: 3}
       propertyPath: m_Name
       value: ba_Button
@@ -3750,6 +3822,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 691282002}
     m_Modifications:
+    - target: {fileID: 3255288350014691236, guid: b0dfef9469e7f43fc888b1204d0fee03, type: 3}
+      propertyPath: techID
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 5050631312863120462, guid: b0dfef9469e7f43fc888b1204d0fee03, type: 3}
       propertyPath: m_Name
       value: sb_Button
@@ -3852,6 +3928,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1348121330}
     m_Modifications:
+    - target: {fileID: 3799405031368657786, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
+      propertyPath: techID
+      value: 29
+      objectReference: {fileID: 0}
     - target: {fileID: 6881600648202391696, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
       propertyPath: m_Name
       value: uc_Button
@@ -4038,6 +4118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: da_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 5724506200967314890, guid: 82bcbb305b7c54dca9c0c96111412cdd, type: 3}
+      propertyPath: techID
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4139,6 +4223,10 @@ PrefabInstance:
     - target: {fileID: 2615432386066867744, guid: 82bcbb305b7c54dca9c0c96111412cdd, type: 3}
       propertyPath: m_Name
       value: dt_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 5724506200967314890, guid: 82bcbb305b7c54dca9c0c96111412cdd, type: 3}
+      propertyPath: techID
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4242,6 +4330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ds_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 5724506200967314890, guid: 82bcbb305b7c54dca9c0c96111412cdd, type: 3}
+      propertyPath: techID
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4260,6 +4352,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1136425808}
     m_Modifications:
+    - target: {fileID: 2952760585134531747, guid: e7bee583b0b404cf58d621a04d2cec95, type: 3}
+      propertyPath: techID
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 4881965704008171337, guid: e7bee583b0b404cf58d621a04d2cec95, type: 3}
       propertyPath: m_Name
       value: bth_Button
@@ -4362,6 +4458,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 89943101}
     m_Modifications:
+    - target: {fileID: 3799405031368657786, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
+      propertyPath: techID
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6881600648202391696, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
       propertyPath: m_Name
       value: ua_Button
@@ -4681,6 +4781,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1942597792}
     m_Modifications:
+    - target: {fileID: 3255288350014691236, guid: b0dfef9469e7f43fc888b1204d0fee03, type: 3}
+      propertyPath: techID
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 5050631312863120462, guid: b0dfef9469e7f43fc888b1204d0fee03, type: 3}
       propertyPath: m_Name
       value: sd_Button
@@ -5084,6 +5188,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1136425808}
     m_Modifications:
+    - target: {fileID: 3799405031368657786, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
+      propertyPath: techID
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6881600648202391696, guid: 0e3e6d5d11be441ed902ba8950058791, type: 3}
       propertyPath: m_Name
       value: uth_Button
@@ -5270,6 +5378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fc_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6812007204073659225, guid: e5b5e9e63837940ec8ab4f903c5f9061, type: 3}
+      propertyPath: techID
+      value: 27
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5288,6 +5400,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 89943101}
     m_Modifications:
+    - target: {fileID: 3757595277708315328, guid: 8ccae1c06d97c4b2fb2892ee3a59ef8e, type: 3}
+      propertyPath: techID
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6854409456634122538, guid: 8ccae1c06d97c4b2fb2892ee3a59ef8e, type: 3}
       propertyPath: m_Name
       value: na_Button
@@ -5636,6 +5752,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1283020475}
     m_Modifications:
+    - target: {fileID: 3770141255133495668, guid: 5d7e3e4eedfbc419c8feae875d6b23b9, type: 3}
+      propertyPath: techID
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6874835633902918302, guid: 5d7e3e4eedfbc419c8feae875d6b23b9, type: 3}
       propertyPath: m_Name
       value: DA_Button
@@ -5738,6 +5858,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1123798813}
     m_Modifications:
+    - target: {fileID: 4576139340021627341, guid: 2519edd8b908c49c6866dad37146a6aa, type: 3}
+      propertyPath: techID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6105719534802559527, guid: 2519edd8b908c49c6866dad37146a6aa, type: 3}
       propertyPath: m_Name
       value: j2_Button
@@ -5924,6 +6048,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8931927281583543185, guid: 2de13d37fe6814b0ea4a71ffb555e8bc, type: 3}
+      propertyPath: techID
+      value: 22
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6030,6 +6158,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ub_g_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4947284915655672539, guid: 2645f35008e874350b4878e36acae780, type: 3}
+      propertyPath: techID
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6131,6 +6263,10 @@ PrefabInstance:
     - target: {fileID: 3980746340754327422, guid: 2e5b6d16122d4474298b5e6ac251f85a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501962222995080703, guid: 2e5b6d16122d4474298b5e6ac251f85a, type: 3}
+      propertyPath: techID
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

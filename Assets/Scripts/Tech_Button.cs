@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Tech_Button : MonoBehaviour
 {
-    [SerializeField] private int techID;
+    [SerializeField] private TechIDs techID;
     [SerializeField] private Button button;
 
     void Start()
