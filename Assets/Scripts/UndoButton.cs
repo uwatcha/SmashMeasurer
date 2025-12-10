@@ -1,17 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tech_Button : MonoBehaviour
+public class UndoButton : MonoBehaviour
 {
-    [SerializeField] private TechIDs techID;
     [SerializeField] private Button button;
-
     void Start()
     {
         button.onClick.AddListener(OnClick);
     }
     public void OnClick()
     {
-        InputDataManager.Instance.AddData(techID);
+        InputDataManager.Instance.RemoveLastData();
     }
 }
