@@ -65,9 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7ff6f8d2a2a7d4f99af51db25f0a9d43, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f777209eb4603423387b2baf8314c86b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 4975754383479117083}
   - component: {fileID: 6764186861866838664}
   - component: {fileID: 8736168385729015213}
+  - component: {fileID: 1713654170880872797}
   m_Layer: 5
   m_Name: Tech_Button
   m_TagString: Untagged
@@ -282,7 +283,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: c5e9d5d27d7644b1aaaccf1612365363, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -334,3 +335,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1713654170880872797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9003388936479083191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2264c6d13e1ea42bdafdea2534ad7406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tech_Button
+  techID: 0
+  button: {fileID: 8736168385729015213}

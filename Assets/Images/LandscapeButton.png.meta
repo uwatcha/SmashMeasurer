@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c5e9d5d27d7644b1aaaccf1612365363
+guid: de25f838503764e50aa8cd5d321539be
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 649223268058989734
-    second: Button_0
+      213: -6407772323657442917
+    second: LandscapeButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button_0
+      name: LandscapeButton_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 150
+        width: 300
         height: 150
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a403906f11820900800000000000000
-      internalID: 649223268058989734
+      spriteID: b9991de75050317a0800000000000000
+      internalID: -6407772323657442917
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Button_0: 649223268058989734
+      LandscapeButton_0: -6407772323657442917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
