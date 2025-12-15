@@ -34,16 +34,21 @@ public class InputDataManager : DontDestroySingleton<InputDataManager>
   public void SaveData()
   {
     StringBuilder csv = new StringBuilder();
-    
+
     foreach (var data in inputDataList)
     {
       csv.AppendLine($"{data.inputSecond:F2},{data.techID}");
     }
-    
+
     string fileName = $"input_data_{DateTime.Now:yyMMdd_HHmm}.csv";
     string filePath = Path.Combine(Application.persistentDataPath, fileName);
     File.WriteAllText(filePath, csv.ToString());
-    
-    Debug.Log($"Data saved to: {filePath}");
+
+    Logger.Log($"Data saved to: {filePath}");
+  }
+
+  public void LogInputtedTechIDs()
+  {
+    Logger.LogElements($"Save datas", inputDataList.ConvertAll(data => data.techID));
   }
 }
