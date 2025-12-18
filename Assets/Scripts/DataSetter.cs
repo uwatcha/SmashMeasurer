@@ -6,13 +6,16 @@ using XCharts.Runtime;
 public class DataSetter : MonoBehaviour
 {
     private BarChart techCountChart;
+    private PieChart techRateChart;
     void Start()
     {
         List<DataEntry> datas = new List<DataEntry>(InputDataManager.Instance.GetInputDataList());
         Logger.LogElements("datas", datas.ConvertAll(d => d.techID));
         techCountChart = GameObject.FindWithTag("TechCountChart").GetComponent<BarChart>();
+        techRateChart = GameObject.FindWithTag("TechRateChart").GetComponent<PieChart>();
         
         SetTechCountData(datas);
+        SetTechRateChart(datas);
     }
 
     private void SetTechCountData(List<DataEntry> datas)
@@ -43,5 +46,31 @@ public class DataSetter : MonoBehaviour
         }
 
         techCountChart.RefreshChart();
+    }
+    private void SetTechRateChart(List<DataEntry> datas)
+    {
+        // カテゴリごとに集計
+        var categoryCounts = datas
+            .GroupBy(d => TechCategoryDict.Dict[d.techID])
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        Logger.LogElements("categoryCounts", categoryCounts.Select(kv => $"{kv.Key}: {kv.Value}").ToList());
+
+        techRateChart.RemoveData();
+
+        if (techRateChart.series.Count == 0)
+        {
+            techRateChart.AddSerie<Pie>("Category");
+        }
+
+        // Attack, Shield, Dodgeの順にデータを追加
+        foreach (Categories category in System.Enum.GetValues(typeof(Categories)))
+        {
+            int count = categoryCounts.TryGetValue(category, out var value) ? value : 0;
+            Logger.Log($"Adding to pie chart: {category} with count {count}");
+            techRateChart.AddData(0, count, category.ToString());
+        }
+
+        techRateChart.RefreshChart();
     }
 }
