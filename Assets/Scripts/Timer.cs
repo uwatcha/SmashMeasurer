@@ -9,6 +9,9 @@ public class Timer : Singleton<Timer>
     private bool isRunning = false;
     public bool IsRunning => isRunning;
 
+    // StartTimer時に呼ばれるアクション
+    public Action onStartTimer = null;
+
     void Update()
   {
     if (isRunning)
@@ -25,6 +28,7 @@ public class Timer : Singleton<Timer>
     {
         startTime = Time.time;
         isRunning = true;
+        onStartTimer?.Invoke();
     }
 
     public float GetElapsedTime()
