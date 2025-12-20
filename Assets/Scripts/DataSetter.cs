@@ -74,17 +74,11 @@ public class DataSetter : MonoBehaviour
 
     private void SetAdvancedTechRateChart()
     {
-        var advancedDir = Path.Combine(Application.dataPath, "AdvancedPlayerDatas");
-        if (!Directory.Exists(advancedDir))
+        // Resources から CSV を読み込み（共通化メソッド）
+        var entriesPerFile = LoadAdvancedCsvEntriesFromResources();
+        if (entriesPerFile.Count == 0)
         {
-            Logger.Log($"Advanced data directory not found: {advancedDir}");
-            return;
-        }
-
-        var csvPaths = Directory.GetFiles(advancedDir, "*.csv");
-        if (csvPaths.Length == 0)
-        {
-            Logger.Log($"No CSV files found in {advancedDir}");
+            Logger.Log("No valid data found in CSV TextAssets for pie chart");
             return;
         }
 
@@ -98,38 +92,12 @@ public class DataSetter : MonoBehaviour
 
         // ファイルごとのカテゴリ集計を保持
         var fileCategoryCountsList = new List<Dictionary<Categories, int>>();
-
-        foreach (var csvPath in csvPaths)
+        foreach (var entries in entriesPerFile)
         {
-            try
-            {
-                var entries = new List<DataEntry>();
-                var lines = File.ReadAllLines(csvPath);
-                foreach (var line in lines)
-                {
-                    if (string.IsNullOrWhiteSpace(line)) continue;
-                    if (line.StartsWith("inputSecond")) continue;
-                    var parts = line.Split(',');
-                    if (parts.Length < 2) continue;
-
-                    if (!float.TryParse(parts[0].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out var sec))
-                        continue;
-                    var techStr = parts[1].Trim();
-                    if (!System.Enum.TryParse<TechIDs>(techStr, out var techId))
-                        continue;
-                    entries.Add(new DataEntry { inputSecond = sec, techID = techId });
-                }
-
-                // このファイルのカテゴリ集計
-                var fileCategoryCounts = entries
-                    .GroupBy(d => TechCategoryDict.Dict[d.techID])
-                    .ToDictionary(g => g.Key, g => g.Count());
-                fileCategoryCountsList.Add(fileCategoryCounts);
-            }
-            catch (System.Exception ex)
-            {
-                Logger.Log($"Failed to read {csvPath}: {ex.Message}");
-            }
+            var fileCategoryCounts = entries
+                .GroupBy(d => TechCategoryDict.Dict[d.techID])
+                .ToDictionary(g => g.Key, g => g.Count());
+            fileCategoryCountsList.Add(fileCategoryCounts);
         }
 
         if (fileCategoryCountsList.Count == 0)
@@ -164,56 +132,26 @@ public class DataSetter : MonoBehaviour
     }
     private void SetAdvancedTechCountData()
     {
-        var advancedDir = Path.Combine(Application.dataPath, "AdvancedPlayerDatas");
-        if (!Directory.Exists(advancedDir))
+        // Resources から CSV を読み込み（共通化メソッド）
+        var entriesPerFile = LoadAdvancedCsvEntriesFromResources();
+        if (entriesPerFile.Count == 0)
         {
-            Logger.Log($"Advanced data directory not found: {advancedDir}");
-            return;
-        }
-
-        var csvPaths = Directory.GetFiles(advancedDir, "*.csv");
-        if (csvPaths.Length == 0)
-        {
-            Logger.Log($"No CSV files found in {advancedDir}");
+            Logger.Log("No valid data found in CSV TextAssets");
             return;
         }
 
         // ファイルごとのテックID集計を保持
         var fileCountsList = new List<Dictionary<TechIDs, int>>();
 
-        foreach (var csvPath in csvPaths)
+        foreach (var entries in entriesPerFile)
         {
-            try
-            {
-                var entries = new List<DataEntry>();
-                var lines = File.ReadAllLines(csvPath);
-                foreach (var line in lines)
-                {
-                    if (string.IsNullOrWhiteSpace(line)) continue;
-                    if (line.StartsWith("inputSecond")) continue; // header
-                    var parts = line.Split(',');
-                    if (parts.Length < 2) continue;
-
-                    if (!float.TryParse(parts[0].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out var sec))
-                        continue;
-                    var techStr = parts[1].Trim();
-                    if (!System.Enum.TryParse<TechIDs>(techStr, out var techId))
-                        continue;
-                    entries.Add(new DataEntry { inputSecond = sec, techID = techId });
-                }
-
-                // このファイルのテックID集計
-                var fileCounts = entries
-                    .GroupBy(d => d.techID)
-                    .ToDictionary(g => g.Key, g => g.Count());
-                fileCountsList.Add(fileCounts);
-                Logger.Log($"Loaded {csvPath}: {entries.Count} entries");
-            }
-            catch (System.Exception ex)
-            {
-                Logger.Log($"Failed to read {csvPath}: {ex.Message}");
-            }
+            var fileCounts = entries
+                .GroupBy(d => d.techID)
+                .ToDictionary(g => g.Key, g => g.Count());
+            fileCountsList.Add(fileCounts);
         }
+
+        // 平均計算・追加は従来通り
 
         if (fileCountsList.Count == 0)
         {
@@ -280,5 +218,52 @@ public class DataSetter : MonoBehaviour
             }
             techCountChart.AddData(serieIndex, tech.Value);
         }
+    }
+
+    /// <summary>
+    /// Resources/AdvancedPlayerDatas 配下の CSV(TextAsset) を読み込み、各ファイルの DataEntry リストを返す
+    /// </summary>
+    private List<List<DataEntry>> LoadAdvancedCsvEntriesFromResources()
+    {
+        var result = new List<List<DataEntry>>();
+        var csvAssets = Resources.LoadAll<TextAsset>("AdvancedPlayerDatas");
+        if (csvAssets == null || csvAssets.Length == 0)
+        {
+            Logger.Log("No CSV TextAssets found in Resources/AdvancedPlayerDatas");
+            return result;
+        }
+
+        foreach (var csv in csvAssets)
+        {
+            try
+            {
+                var entries = new List<DataEntry>();
+                var lines = csv.text.Split('\n');
+                foreach (var raw in lines)
+                {
+                    var line = raw.Trim();
+                    if (string.IsNullOrWhiteSpace(line)) continue;
+                    if (line.StartsWith("inputSecond")) continue; // header
+                    var parts = line.Split(',');
+                    if (parts.Length < 2) continue;
+
+                    if (!float.TryParse(parts[0].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out var sec))
+                        continue;
+                    var techStr = parts[1].Trim();
+                    if (!System.Enum.TryParse<TechIDs>(techStr, out var techId))
+                        continue;
+                    entries.Add(new DataEntry { inputSecond = sec, techID = techId });
+                }
+
+                result.Add(entries);
+                Logger.Log($"Loaded {csv.name}: {entries.Count} entries");
+            }
+            catch (System.Exception ex)
+            {
+                Logger.Log($"Failed to parse {csv.name}: {ex.Message}");
+            }
+        }
+
+        return result;
     }
 }
