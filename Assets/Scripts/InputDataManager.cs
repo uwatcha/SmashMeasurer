@@ -33,6 +33,8 @@ public class InputDataManager : DontDestroySingleton<InputDataManager>
 
   public void SaveData()
   {
+    //TODO: ファイル出力できるようにする
+    //TODO: 上級者データをビルド後にOSで追加できるようにする
     StringBuilder csv = new StringBuilder();
 
     foreach (var data in inputDataList)
