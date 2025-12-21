@@ -74,8 +74,8 @@ public class DataSetter : MonoBehaviour
 
     private void SetAdvancedTechRateChart()
     {
-        // Resources から CSV を読み込み（共通化メソッド）
-        var entriesPerFile = LoadAdvancedCsvEntriesFromResources();
+        // persistentDataPath/AdvancedPlayerDatas から CSV を読み込み（共通化メソッド）
+        var entriesPerFile = LoadAdvancedCsvEntriesFromPersistent();
         if (entriesPerFile.Count == 0)
         {
             Logger.Log("No valid data found in CSV TextAssets for pie chart");
@@ -132,8 +132,8 @@ public class DataSetter : MonoBehaviour
     }
     private void SetAdvancedTechCountData()
     {
-        // Resources から CSV を読み込み（共通化メソッド）
-        var entriesPerFile = LoadAdvancedCsvEntriesFromResources();
+        // persistentDataPath/AdvancedPlayerDatas から CSV を読み込み（共通化メソッド）
+        var entriesPerFile = LoadAdvancedCsvEntriesFromPersistent();
         if (entriesPerFile.Count == 0)
         {
             Logger.Log("No valid data found in CSV TextAssets");
@@ -221,29 +221,46 @@ public class DataSetter : MonoBehaviour
     }
 
     /// <summary>
-    /// Resources/AdvancedPlayerDatas 配下の CSV(TextAsset) を読み込み、各ファイルの DataEntry リストを返す
+    /// persistentDataPath/AdvancedPlayerDatas 配下の CSV ファイルを読み込み、各ファイルの DataEntry リストを返す
     /// </summary>
-    private List<List<DataEntry>> LoadAdvancedCsvEntriesFromResources()
+    private List<List<DataEntry>> LoadAdvancedCsvEntriesFromPersistent()
     {
         var result = new List<List<DataEntry>>();
-        var csvAssets = Resources.LoadAll<TextAsset>("AdvancedPlayerDatas");
-        if (csvAssets == null || csvAssets.Length == 0)
+        var advancedDir = Path.Combine(Application.persistentDataPath, "AdvancedPlayerDatas");
+        
+        if (!Directory.Exists(advancedDir))
         {
-            Logger.Log("No CSV TextAssets found in Resources/AdvancedPlayerDatas");
+            Logger.Log($"Advanced data directory not found: {advancedDir}");
             return result;
         }
 
-        foreach (var csv in csvAssets)
+        var csvPaths = Directory.GetFiles(advancedDir, "*.csv");
+        if (csvPaths.Length == 0)
+        {
+            Logger.Log($"No CSV files found in {advancedDir}");
+            return result;
+        }
+
+        foreach (var csvPath in csvPaths)
         {
             try
             {
                 var entries = new List<DataEntry>();
-                var lines = csv.text.Split('\n');
+                var lines = File.ReadAllLines(csvPath);
+                bool isFirstLine = true;
                 foreach (var raw in lines)
                 {
                     var line = raw.Trim();
                     if (string.IsNullOrWhiteSpace(line)) continue;
-                    if (line.StartsWith("inputSecond")) continue; // header
+                    
+                    // 1行目はメタデータ（studentID, experimentTimesCount）なのでスキップ
+                    if (isFirstLine)
+                    {
+                        isFirstLine = false;
+                        continue;
+                    }
+                    
+                    if (line.StartsWith("inputSecond")) continue; // header（念のため）
                     var parts = line.Split(',');
                     if (parts.Length < 2) continue;
 
@@ -256,11 +273,11 @@ public class DataSetter : MonoBehaviour
                 }
 
                 result.Add(entries);
-                Logger.Log($"Loaded {csv.name}: {entries.Count} entries");
+                Logger.Log($"Loaded {Path.GetFileName(csvPath)}: {entries.Count} entries");
             }
             catch (System.Exception ex)
             {
-                Logger.Log($"Failed to parse {csv.name}: {ex.Message}");
+                Logger.Log($"Failed to parse {Path.GetFileName(csvPath)}: {ex.Message}");
             }
         }
 

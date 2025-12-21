@@ -56,7 +56,7 @@ public class InputDataManager : DontDestroySingleton<InputDataManager>
       csv.AppendLine($"{data.inputSecond:F2},{data.techID}");
     }
 
-    string fileName = $"input_data_{DateTime.Now:yyMMdd_HHmm}.csv";
+    string fileName = $"{studentID}_{experimentTimesCount}times_{DateTime.Now:yyMMdd_HHmm}.csv";
     string filePath = Path.Combine(Application.persistentDataPath, fileName);
     File.WriteAllText(filePath, csv.ToString());
 
