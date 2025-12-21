@@ -1,0 +1,3 @@
+以下の項目をInfo.plistに新規追加する
+Application supports iTunes file sharing,Boolean,YES
+Supports opening documents in place,Boolean,YES
