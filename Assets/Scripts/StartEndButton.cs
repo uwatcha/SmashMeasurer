@@ -65,7 +65,6 @@ public class StartEndButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void OnLongClick()
     {
         Timer.Instance.StopTimer();
-        InputDataManager.Instance.SaveData();
         SceneManager.LoadScene("ChartScene");
     }
 }

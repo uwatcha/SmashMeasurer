@@ -8,6 +8,17 @@ using UnityEngine.InputSystem.Utilities;
 public class InputDataManager : DontDestroySingleton<InputDataManager>
 {
   private List<DataEntry> inputDataList = new List<DataEntry>();
+  private string studentID = "";
+  private int experimentTimesCount = 0;
+
+  public string StudentID
+  {
+    set => studentID = value;
+  }
+  public int ExperimentTimesCount
+  {
+    set => experimentTimesCount = value;
+  }
 
   public void AddData(TechIDs techID)
   {
@@ -33,10 +44,13 @@ public class InputDataManager : DontDestroySingleton<InputDataManager>
 
   public void SaveData()
   {
-    //TODO: ファイル出力できるようにする
     //TODO: 上級者データをビルド後にOSで追加できるようにする
     StringBuilder csv = new StringBuilder();
 
+    // 1行目: メタデータ（studentID, experimentTimesCount）
+    csv.AppendLine($"{studentID},{experimentTimesCount}");
+
+    // 2行目以降: inputSecond, techID
     foreach (var data in inputDataList)
     {
       csv.AppendLine($"{data.inputSecond:F2},{data.techID}");
