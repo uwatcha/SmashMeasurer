@@ -74,8 +74,14 @@ public class DataSetter : MonoBehaviour
 
     private void SetAdvancedTechRateChart()
     {
-        // persistentDataPath/AdvancedPlayerDatas から CSV を読み込み（共通化メソッド）
-        var entriesPerFile = LoadAdvancedCsvEntriesFromPersistent();
+        // ストックごとのフォルダから CSV を読み込み
+        var twoStocksEntries = LoadAdvancedCsvEntriesFromFolder("2stocks");
+        var threeStocksEntries = LoadAdvancedCsvEntriesFromFolder("3stocks");
+
+        var entriesPerFile = new List<List<DataEntry>>();
+        entriesPerFile.AddRange(twoStocksEntries);
+        entriesPerFile.AddRange(threeStocksEntries);
+
         if (entriesPerFile.Count == 0)
         {
             Logger.Log("No valid data found in CSV TextAssets for pie chart");
@@ -132,48 +138,60 @@ public class DataSetter : MonoBehaviour
     }
     private void SetAdvancedTechCountData()
     {
-        // persistentDataPath/AdvancedPlayerDatas から CSV を読み込み（共通化メソッド）
-        var entriesPerFile = LoadAdvancedCsvEntriesFromPersistent();
-        if (entriesPerFile.Count == 0)
+        // ストックごとのフォルダから CSV を読み込み
+        var twoStocksEntries = LoadAdvancedCsvEntriesFromFolder("2stocks");
+        var threeStocksEntries = LoadAdvancedCsvEntriesFromFolder("3stocks");
+
+        if (twoStocksEntries.Count == 0 && threeStocksEntries.Count == 0)
         {
-            Logger.Log("No valid data found in CSV TextAssets");
+            Logger.Log("No valid data found in 2stocks or 3stocks folders");
             return;
         }
 
-        // ファイルごとのテックID集計を保持
-        var fileCountsList = new List<Dictionary<TechIDs, int>>();
-
-        foreach (var entries in entriesPerFile)
-        {
-            var fileCounts = entries
-                .GroupBy(d => d.techID)
-                .ToDictionary(g => g.Key, g => g.Count());
-            fileCountsList.Add(fileCounts);
-        }
-
-        // 平均計算・追加は従来通り
-
-        if (fileCountsList.Count == 0)
-        {
-            Logger.Log("No valid data found in CSV files");
-            return;
-        }
-
-        // 全テックIDについて、ファイル間での平均を計算
+        // テックIDごとの合計を計算
         var allTechIds = TechIdNameDict.Dict.Keys.ToList();
-        var averageCounts = new Dictionary<TechIDs, float>();
+        var twoStocksCounts = new Dictionary<TechIDs, float>();
+        var threeStocksCounts = new Dictionary<TechIDs, float>();
+
+        // 2stocks の合計を計算（float で精度を保つ）
+        foreach (var techId in allTechIds)
+        {
+            float count = 0;
+            foreach (var entries in twoStocksEntries)
+            {
+                count += entries.Count(e => e.techID == techId);
+            }
+            twoStocksCounts[techId] = count;
+        }
+
+        // 3stocks の合計を計算
+        foreach (var techId in allTechIds)
+        {
+            float count = 0;
+            foreach (var entries in threeStocksEntries)
+            {
+                count += entries.Count(e => e.techID == techId);
+            }
+            threeStocksCounts[techId] = count;
+        }
+
+        Logger.Log($"2stocks files: {twoStocksEntries.Count}, 3stocks files: {threeStocksEntries.Count}");
+        Logger.LogElements("2stocks counts", twoStocksCounts.Select(kv => $"{kv.Key}: {kv.Value}").ToList());
+        Logger.LogElements("3stocks counts", threeStocksCounts.Select(kv => $"{kv.Key}: {kv.Value}").ToList());
+
+        // 3stocks を 2/3 倍して、2stocks と合計
+        int totalFiles = twoStocksEntries.Count + threeStocksEntries.Count;
+        var normalizedCounts = new Dictionary<TechIDs, float>();
 
         foreach (var techId in allTechIds)
         {
-            var counts = fileCountsList
-                .Select(dict => dict.TryGetValue(techId, out var count) ? count : 0)
-                .ToList();
-            var average = (float)counts.Average();
-            // 小数第一位で四捨五入
-            averageCounts[techId] = (float)System.Math.Round(average, 1);
+            float twoStocksCount = twoStocksCounts[techId];
+            float threeStocksScaled = threeStocksCounts[techId] * 2f / 3f;
+            float combined = twoStocksCount + threeStocksScaled;
+            normalizedCounts[techId] = combined / totalFiles;
         }
 
-        Logger.Log($"Calculated averages from {fileCountsList.Count} files");
+        Logger.LogElements("normalized averages", normalizedCounts.Select(kv => $"{kv.Key}: {kv.Value}").ToList());
 
         // 追加先Serieを取得（優先: 名前"Advanced"、無ければ index 0）
         var advancedSerie = techCountChart.GetSerie("Advanced") ?? techCountChart.GetSerie(0);
@@ -183,10 +201,10 @@ public class DataSetter : MonoBehaviour
             return;
         }
 
-        // 平均値をTechIdNameDict の順序で直接グラフに追加（AddTechCountDataToChartをバイパス）
+        // 正規化された平均値をグラフに追加（四捨五入は後で）
         foreach (var kv in TechIdNameDict.Dict.OrderByDescending(kv => kv.Key))
         {
-            var avgValue = averageCounts.TryGetValue(kv.Key, out var avg) ? avg : 0f;
+            var avgValue = normalizedCounts.TryGetValue(kv.Key, out var avg) ? avg : 0f;
             Logger.Log($"Adding to chart (Advanced): {kv.Value} = {avgValue}");
             techCountChart.AddData(advancedSerie.index, avgValue);
         }
@@ -222,23 +240,23 @@ public class DataSetter : MonoBehaviour
     }
 
     /// <summary>
-    /// persistentDataPath/AdvancedPlayerDatas 配下の CSV ファイルを読み込み、各ファイルの DataEntry リストを返す
+    /// persistentDataPath/AdvancedPlayerDatas/{folderName} 配下の CSV ファイルを読み込み、各ファイルの DataEntry リストを返す
     /// </summary>
-    private List<List<DataEntry>> LoadAdvancedCsvEntriesFromPersistent()
+    private List<List<DataEntry>> LoadAdvancedCsvEntriesFromFolder(string folderName)
     {
         var result = new List<List<DataEntry>>();
-        var advancedDir = Path.Combine(Application.persistentDataPath, "AdvancedPlayerDatas");
-        
-        if (!Directory.Exists(advancedDir))
+        var folderPath = Path.Combine(Application.persistentDataPath, "AdvancedPlayerDatas", folderName);
+
+        if (!Directory.Exists(folderPath))
         {
-            Logger.Log($"Advanced data directory not found: {advancedDir}");
+            Logger.Log($"Folder not found: {folderPath}");
             return result;
         }
 
-        var csvPaths = Directory.GetFiles(advancedDir, "*.csv");
+        var csvPaths = Directory.GetFiles(folderPath, "*.csv");
         if (csvPaths.Length == 0)
         {
-            Logger.Log($"No CSV files found in {advancedDir}");
+            Logger.Log($"No CSV files found in {folderPath}");
             return result;
         }
 
@@ -253,14 +271,14 @@ public class DataSetter : MonoBehaviour
                 {
                     var line = raw.Trim();
                     if (string.IsNullOrWhiteSpace(line)) continue;
-                    
+
                     // 1行目はメタデータ（studentID, experimentTimesCount）なのでスキップ
                     if (isFirstLine)
                     {
                         isFirstLine = false;
                         continue;
                     }
-                    
+
                     if (line.StartsWith("inputSecond")) continue; // header（念のため）
                     var parts = line.Split(',');
                     if (parts.Length < 2) continue;
@@ -274,7 +292,7 @@ public class DataSetter : MonoBehaviour
                 }
 
                 result.Add(entries);
-                Logger.Log($"Loaded {Path.GetFileName(csvPath)}: {entries.Count} entries");
+                Logger.Log($"Loaded {Path.GetFileName(csvPath)} from {folderName}: {entries.Count} entries");
             }
             catch (System.Exception ex)
             {
