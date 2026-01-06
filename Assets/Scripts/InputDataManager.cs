@@ -44,7 +44,6 @@ public class InputDataManager : DontDestroySingleton<InputDataManager>
 
   public void SaveData()
   {
-    //TODO: 上級者データをビルド後にOSで追加できるようにする
     StringBuilder csv = new StringBuilder();
 
     // 1行目: メタデータ（studentID, experimentTimesCount）

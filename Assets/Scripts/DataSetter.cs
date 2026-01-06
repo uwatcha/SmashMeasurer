@@ -169,8 +169,8 @@ public class DataSetter : MonoBehaviour
                 .Select(dict => dict.TryGetValue(techId, out var count) ? count : 0)
                 .ToList();
             var average = (float)counts.Average();
-            // 四捨五入して整数に
-            averageCounts[techId] = Mathf.Round(average);
+            // 小数第一位で四捨五入
+            averageCounts[techId] = (float)System.Math.Round(average, 1);
         }
 
         Logger.Log($"Calculated averages from {fileCountsList.Count} files");
@@ -186,9 +186,9 @@ public class DataSetter : MonoBehaviour
         // 平均値をTechIdNameDict の順序で直接グラフに追加（AddTechCountDataToChartをバイパス）
         foreach (var kv in TechIdNameDict.Dict.OrderByDescending(kv => kv.Key))
         {
-            var avgValue = averageCounts.TryGetValue(kv.Key, out var avg) ? avg : 0;
+            var avgValue = averageCounts.TryGetValue(kv.Key, out var avg) ? avg : 0f;
             Logger.Log($"Adding to chart (Advanced): {kv.Value} = {avgValue}");
-            techCountChart.AddData(advancedSerie.index, (int)avgValue);
+            techCountChart.AddData(advancedSerie.index, avgValue);
         }
 
         techCountChart.RefreshChart();
@@ -216,7 +216,8 @@ public class DataSetter : MonoBehaviour
             {
                 techCountChart.AddYAxisData(tech.Key);
             }
-            techCountChart.AddData(serieIndex, tech.Value);
+            // 小数第一位で四捨五入して float で追加
+            techCountChart.AddData(serieIndex, (float)System.Math.Round((double)tech.Value, 1));
         }
     }
 
